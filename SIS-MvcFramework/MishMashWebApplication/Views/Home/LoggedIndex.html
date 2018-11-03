@@ -1,0 +1,116 @@
+﻿<main class="mt-3 mb-5">
+    @if (User.Role == "Admin")
+    {
+    <h1 class="text-mishmash text-center">Welcome, Admin-@User.Username!</h1>
+    }
+    @else
+    {
+    <h1 class="text-mishmash text-center">Welcome, @User.Username!</h1>
+    }
+
+    <h3 class="text-mishmash">Your channels</h3>
+    <div class="container-fluid channel-holder">
+        <div class="row d-flex justify-content-around">
+            { var numberOfChannels = @Model.FollowedChannels.Count(); }
+            @for(int i = 0; i < @numberOfChannels; i++)
+            {
+                { var channel = @Model.FollowedChannels[i]; }
+                @if(i > 0 && i % 5 == 0)
+                {
+                    </div>
+                    <div class="row d-flex justify-content-around">
+                }
+
+                <div class="channel p-1 col-md-2 bg-mishmash rounded-top rounded-bottom m-3">
+                    <h5 class="text-center mt-3 text-white">@channel.Name</h5>
+                    <hr class="bg-white hr-2 ml-4 mr-4" />
+                    <h5 class="text-center mt-3 text-white">@channel.Type Channel</h5>
+                    <hr class="bg-white hr-2 ml-4 mr-4" />
+                    <h6 class="text-center text-white mb-3">@channel.FollowersCount</h6>
+                    <hr class="bg-white hr-2 ml-4 mr-4" />
+                    <div class="row justify-content-around">
+                        <h6 class="text-white" href="/">Following</h6>
+                    </div>
+                </div>
+            }
+
+            { var numberOfEmptyChannels = (5 - (@numberOfChannels % 5)) % 5; }
+            @for(int i = 0; i < @numberOfEmptyChannels; i++)
+            {
+                <div class="channel p-1 col-md-2 rounded-top rounded-bottom m-3"></div>
+            }
+        </div>
+    </div>
+    <hr class="bg-mishmash hr-2" />
+
+    <h3 class="text-mishmash">Suggested</h3>
+    <div class="container-fluid channel-holder">
+        <div class="row d-flex justify-content-around">
+            { numberOfChannels = @Model.SuggestedChannels.Count(); }
+            @for(int i = 0; i < @numberOfChannels; i++)
+            {
+                { var channel = @Model.SuggestedChannels[i]; }
+                @if(i > 0 && i % 5 == 0)
+                {
+                     </div>
+                     <div class="row d-flex justify-content-around">
+                }
+
+                <div class="channel p-1 col-md-2 bg-mishmash rounded-top rounded-bottom m-3">
+                    <h5 class="text-center mt-3 text-white">@channel.Name</h5>
+                    <hr class="bg-white hr-2 ml-4 mr-4" />
+                    <h5 class="text-center mt-3 text-white">@channel.Type Channel</h5>
+                    <hr class="bg-white hr-2 ml-4 mr-4" />
+                    <h6 class="text-center text-white mb-3">@channel.FollowersCount</h6>
+                    <hr class="bg-white hr-2 ml-4 mr-4" />
+                    <div class="row justify-content-around mb-3 ml-4 mr-4">
+                        <a class="text-white" href="/channels/follow?id=@channel.Id">Follow</a>
+                        <a class="text-white" href="/channels/details?id=@channel.Id">Details</a>
+                    </div>
+                </div>
+            }
+
+            { numberOfEmptyChannels = (5 - (@numberOfChannels % 5)) % 5; }
+            @for(int i = 0; i < @numberOfEmptyChannels; i++)
+            {
+                <div class="channel p-1 col-md-2 rounded-top rounded-bottom m-3"></div>
+            }
+        </div>
+    </div>
+    <hr class="bg-mishmash hr-2" />
+
+    <h3 class="text-mishmash">See other</h3>
+    <div class="container-fluid channel-holder">
+        <div class="row d-flex justify-content-around">
+            { numberOfChannels = @Model.SeeOthersChannels.Count(); }
+            @for(int i = 0; i < @numberOfChannels; i++)
+            {
+                { var channel = @Model.SeeOthersChannels[i]; }
+                @if(i > 0 && i % 5 == 0)
+                {
+                     </div>
+                     <div class="row d-flex justify-content-around">
+                }
+
+                <div class="channel p-1 col-md-2 bg-mishmash rounded-top rounded-bottom m-3">
+                    <h5 class="text-center mt-3 text-white">@channel.Name</h5>
+                    <hr class="bg-white hr-2 ml-4 mr-4" />
+                    <h5 class="text-center mt-3 text-white">@channel.Type Channel</h5>
+                    <hr class="bg-white hr-2 ml-4 mr-4" />
+                    <h6 class="text-center text-white mb-3">@channel.FollowersCount</h6>
+                    <hr class="bg-white hr-2 ml-4 mr-4" />
+                    <div class="row justify-content-around mb-3 ml-4 mr-4">
+                        <a class="text-white" href="/channels/follow?id=@channel.Id">Follow</a>
+                        <a class="text-white" href="/channels/details?id=@channel.Id">Details</a>
+                    </div>
+                </div>
+            }
+
+            { numberOfEmptyChannels = (5 - (@numberOfChannels % 5)) % 5; }
+            @for(int i = 0; i < @numberOfEmptyChannels; i++)
+            {
+                <div class="channel p-1 col-md-2 rounded-top rounded-bottom m-3"></div>
+            }
+        </div>
+    </div>
+</main>
